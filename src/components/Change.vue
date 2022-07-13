@@ -11,6 +11,7 @@
           <div class="change__form">
 
             <InputText
+              min=0
               v-model="giveCurrNum"
               type="number"
               class="change__input p-inputtext-sm"
@@ -171,11 +172,16 @@ export default {
 
     // Делаем диспатч для перерасчета получаемой суммы
     giveCurrNum() {
-      this.$store.dispatch("calcGetCurr", {
-        c1: this.selectedCurrCanSale.id,
-        c2: this.selectedCurrCanBuy.id,
-        s1: this.giveCurrNum
-      });
+      // Проверка на отрицательное число
+      if (this.giveCurrNum >= 0) {
+        this.$store.dispatch("calcGetCurr", {
+          c1: this.selectedCurrCanSale.id,
+          c2: this.selectedCurrCanBuy.id,
+          s1: this.giveCurrNum
+        });
+      } else {
+        alert('Please enter a positive number')
+      }
     }
   }
 };
