@@ -181,6 +181,7 @@ export default {
         });
       } else {
         alert('Please enter a positive number')
+        this.giveCurrNum = null
       }
     }
   }
